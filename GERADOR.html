@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de QR Code</title>
+</head>
+<body>
+  <h1>Gerador de QR Code</h1>
+  <div id="qrcode-container">
+    <p>O QR Code aparecerá abaixo:</p>
+    <img id="qrcode" alt="QR Code" />
+  </div>
+
+  <script>
+    // URL base da API
+    const baseUrl = 'https://quickchart.io/qr';
+    
+    // Parâmetros do QR Code
+    const params = new URLSearchParams({
+      website: "",
+      text: "Here's my text", // Texto do QR Code
+      size: '300',            // Tamanho em pixels
+    });
+
+    // URL final para gerar o QR Code
+    const qrCodeUrl = `${baseUrl}?${params.toString()}`;
+
+    // Inserir o QR Code no elemento <img>
+    const qrCodeImg = document.getElementById('qrcode');
+    qrCodeImg.src = qrCodeUrl;
+  </script>
+</body>
+</html>
