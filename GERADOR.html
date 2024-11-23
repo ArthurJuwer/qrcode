@@ -16,11 +16,11 @@
     // URL base da API
     const baseUrl = 'https://quickchart.io/qr';
     
-    const numeroAleatorio = 1
+    const numero = 1;
 
     // Parâmetros do QR Code
     const params = new URLSearchParams({
-      text: `https://arthurjuwer.github.io/qrcode/LEITOR.html?=${numeroAleatorio}`, // Texto do QR Code
+      text: `https://arthurjuwer.github.io/qrcode/LEITOR.html?numero=${numero}`, // Corrigido o parâmetro de consulta
       size: '300',            // Tamanho em pixels
     });
 

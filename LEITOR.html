@@ -3,16 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Leitor de QR Code</title>
 </head>
 <body>
-    <a href="./LEITOR.html"></a>
+    <h1>Leitor de QR Code</h1>
+    <p id="resultado"></p>
+
+    <script>
+        // Exibir a URL completa no conteúdo da página
+        
+
+        // Extrair o parâmetro 'numero' da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const numero = urlParams.get('numero');
+
+        // Exibir o número extraído (se houver)
+        if (numero) {
+            console.log("Número extraído: " + numero);
+            document.getElementById('resultado').textContent = `Número extraído: ${numero}`;
+            if(numero == 1){
+                document.body.textContent = window.location.href;
+            }
+        } else {
+            console.log("Nenhum parâmetro 'numero' encontrado.");
+            document.getElementById('resultado').textContent = 'Nenhum parâmetro "numero" encontrado.';
+        }
+    </script>
 </body>
-<script>
-    console.log('console teste')
-    // LER URL
-    if(window.location.href == 'https://arthurjuwer.github.io/qrcode/LEITOR.html?=1'){
-        console.log("FUNCIONOU ITEM 1")
-    }
-</script>
 </html>
