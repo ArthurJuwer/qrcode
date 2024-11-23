@@ -7,29 +7,63 @@
 </head>
 <body>
   <h1>Gerador de QR Code</h1>
+
   <div id="qrcode-container">
-    <p>O QR Code aparecerá abaixo:</p>
-    <img id="qrcode" alt="QR Code" />
+    <p>Os QR Codes aparecerão abaixo:</p>
+    <!-- Aqui os QR Codes serão adicionados -->
+  </div>
+
+  <div>
+    <button onclick="mostrarInput()">Gerar QR Code</button>
+  </div>
+
+  <div id="input-container" style="display: none;">
+    <label for="numero">Digite o número de identificação:</label>
+    <input type="number" id="numero" placeholder="Número" />
+    <button onclick="gerarQRCode()">Gerar QR Code</button>
   </div>
 
   <script>
-    // URL base da API
-    const baseUrl = 'https://quickchart.io/qr';
+    // Função para mostrar o campo de entrada
+    function mostrarInput() {
+      const inputContainer = document.getElementById('input-container');
+      inputContainer.style.display = 'block'; // Exibe o campo de input
+    }
+
+    // Função para gerar o QR Code com base no número fornecido
+    function gerarQRCode() {
+      const numero = document.getElementById('numero').value;
+      
+      if (!numero) {
+        alert('Por favor, insira um número.');
+        return;
+      }
+
+      // URL base da API
+      const baseUrl = 'https://quickchart.io/qr';
     
-    const numero = 1;
+      // Parâmetros do QR Code
+      const params = new URLSearchParams({
+        text: `https://arthurjuwer.github.io/qrcode/LEITOR.html?numero=${numero}`, // Usando o número inserido
+        size: '300',            // Tamanho do QR Code
+      });
 
-    // Parâmetros do QR Code
-    const params = new URLSearchParams({
-      text: `https://arthurjuwer.github.io/qrcode/LEITOR.html?numero=${numero}`, // Corrigido o parâmetro de consulta
-      size: '300',            // Tamanho em pixels
-    });
+      // URL final para gerar o QR Code
+      const qrCodeUrl = `${baseUrl}?${params.toString()}`;
 
-    // URL final para gerar o QR Code
-    const qrCodeUrl = `${baseUrl}?${params.toString()}`;
+      // Criar um novo elemento <img> para o novo QR Code
+      const newQRCodeImg = document.createElement('img');
+      newQRCodeImg.src = qrCodeUrl;
+      newQRCodeImg.alt = `QR Code para o número ${numero}`;
 
-    // Inserir o QR Code no elemento <img>
-    const qrCodeImg = document.getElementById('qrcode');
-    qrCodeImg.src = qrCodeUrl;
+      // Adicionar o novo QR Code à página (no container de QR Codes)
+      const qrCodeContainer = document.getElementById('qrcode-container');
+      qrCodeContainer.appendChild(newQRCodeImg);
+
+      // Esconde o campo de entrada após gerar o QR Code
+      const inputContainer = document.getElementById('input-container');
+      inputContainer.style.display = 'none';
+    }
   </script>
 </body>
 </html>
